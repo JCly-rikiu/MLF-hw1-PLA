@@ -19,12 +19,11 @@ Vector Vector::operator-(const Vector& other) const {
 }
 
 double Vector::dot(const Vector& other) const {
-  return std::inner_product(vector.begin(), vector.end(), other.vector.begin(), 0.0);
+  return std::inner_product(vector.begin(), vector.end(), other.vector.begin(),
+                            0.0);
 }
 
-unsigned int Vector::getDimension() {
-  return vector.size() - 1;
-}
+unsigned int Vector::getDimension() { return vector.size() - 1; }
 
 std::ostream& operator<<(std::ostream& os, const Vector& other) {
   os << "Dim: " << other.vector.size() << "\n";
