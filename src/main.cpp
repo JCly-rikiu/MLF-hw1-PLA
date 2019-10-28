@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
   std::mt19937 random_engine(random_device());
   switch (std::stoi(argv[1])) {
     case 6: {
-      auto [data, dimension] = parse("data/hw1_6_train.dat");
+      auto&& [data, dimension] = parse("data/hw1_6_train.dat");
       for (auto i = 0; i != 1126; i++) {
         std::shuffle(data.begin(), data.end(), random_engine);
         [[maybe_unused]] auto&& [weights, steps] = trainPLA(data, dimension);
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
       std::cout << std::endl;
     } break;
     case 7: {
-      auto [data, dimension] = parse("data/hw1_7_train.dat");
+      auto&& [data, dimension] = parse("data/hw1_7_train.dat");
       [[maybe_unused]] auto [test_data, test_dimension] = parse("data/hw1_7_test.dat");
       for (auto i = 0; i != 1126; i++) {
         auto&& weights = trainPocketPLA(data, dimension, 100);
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
       std::cout << std::endl;
     } break;
     case 8:{
-      auto [data, dimension] = parse("data/hw1_7_train.dat");
+      auto&& [data, dimension] = parse("data/hw1_7_train.dat");
       [[maybe_unused]] auto [test_data, test_dimension] = parse("data/hw1_7_test.dat");
       for (auto i = 0; i != 1126; i++) {
         [[maybe_unused]] auto&& [weights, steps] = trainPLA(data, dimension, 100);
