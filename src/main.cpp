@@ -37,6 +37,7 @@ int main(int argc, char* argv[]) {
       auto&& [data, dimension] = parse("data/hw1_7_train.dat");
       [[maybe_unused]] auto [test_data, test_dimension] = parse("data/hw1_7_test.dat");
       for (auto i = 0; i != 1126; i++) {
+        std::shuffle(data.begin(), data.end(), random_engine);
         [[maybe_unused]] auto&& [weights, steps] = trainPLA(data, dimension, 100);
         std::cout << test(weights, test_data) << " ";
       }
