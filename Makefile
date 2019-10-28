@@ -29,3 +29,12 @@ clean:
 
 run:
 	$(TARGET)
+
+6:
+	$(TARGET) 6 | python3 draw.py 6
+
+7:
+	$(TARGET) 7 | python3 draw.py 7
+
+8:
+	$(TARGET) 8 | python3 draw.py 8
