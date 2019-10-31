@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
       for (auto i = 0; i != 1126; i++) {
         std::shuffle(data.begin(), data.end(), random_engine);
         [[maybe_unused]] auto&& [weights, steps] =
-            trainPLA(data, dimension, 100);
+            trainPLA(data, dimension, static_cast<unsigned int>(100));
         std::cout << test(weights, test_data) << " ";
       }
       std::cout << std::endl;

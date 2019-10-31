@@ -2,12 +2,24 @@
 
 std::tuple<Vector, unsigned int> trainPLA(
     const std::vector<std::tuple<Vector, int>>& data, unsigned int dimension) {
-  return trainPLA(data, dimension, 0);
+  return trainPLA(data, dimension, 0, 1.0);
 }
 
 std::tuple<Vector, unsigned int> trainPLA(
     const std::vector<std::tuple<Vector, int>>& data, unsigned int dimension,
     unsigned int until_steps) {
+  return trainPLA(data, dimension, until_steps, 1.0);
+}
+
+std::tuple<Vector, unsigned int> trainPLA(
+    const std::vector<std::tuple<Vector, int>>& data, unsigned int dimension,
+    double learning_rate) {
+  return trainPLA(data, dimension, 0, learning_rate);
+}
+
+std::tuple<Vector, unsigned int> trainPLA(
+    const std::vector<std::tuple<Vector, int>>& data, unsigned int dimension,
+    unsigned int until_steps, double learning_rate) {
   Vector weights;
   for (unsigned int i = 0; i != dimension + 1; i++) weights.addElement(0.0);
 
@@ -17,10 +29,7 @@ std::tuple<Vector, unsigned int> trainPLA(
     keep_doing = false;
     for (auto& [x, y] : data) {
       if (weights.dot(x) * y <= 0.0) {
-        if (y == 1)
-          weights = weights + x;
-        else
-          weights = weights - x;
+        weights = weights + learning_rate * y * x;
         keep_doing = true;
         steps++;
         if (until_steps > 0 && steps >= until_steps) {

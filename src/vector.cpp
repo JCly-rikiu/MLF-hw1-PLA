@@ -23,6 +23,26 @@ double Vector::dot(const Vector& other) const {
                             0.0);
 }
 
+Vector Vector::operator*(const int& other) const {
+  return (*this) * static_cast<double>(other);
+}
+
+Vector operator*(const int& other, const Vector& vector) {
+  return vector * other;
+}
+
+Vector Vector::operator*(const double& other) const {
+  Vector result;
+  result.vector.resize(vector.size());
+  std::transform(vector.begin(), vector.end(), result.vector.begin(),
+                 [&](auto& x) { return x * other; });
+  return result;
+}
+
+Vector operator*(const double& other, const Vector& vector) {
+  return vector * other;
+}
+
 unsigned int Vector::getDimension() { return vector.size() - 1; }
 
 std::ostream& operator<<(std::ostream& os, const Vector& other) {

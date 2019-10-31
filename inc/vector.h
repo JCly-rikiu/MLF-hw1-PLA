@@ -16,6 +16,10 @@ public:
   Vector operator+(const Vector&) const;
   Vector operator-(const Vector&) const;
   double dot(const Vector&) const;
+  Vector operator*(const int&) const;
+  friend Vector operator*(const int&, const Vector&);
+  Vector operator*(const double&) const;
+  friend Vector operator*(const double&, const Vector&);
 
   unsigned int getDimension();
 
