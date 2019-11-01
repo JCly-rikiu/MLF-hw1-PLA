@@ -47,6 +47,8 @@ Vector trainPocketPLA(const std::vector<std::tuple<Vector, int>>& data,
                       unsigned int dimension, unsigned int until_steps) {
   Vector weights;
   for (unsigned int i = 0; i != dimension + 1; i++) weights.addElement(0.0);
+  Vector best_weights = weights;
+  double error, best_error = 1.0;
 
   std::random_device random_device;
   std::mt19937 random_engine(random_device());
@@ -57,14 +59,16 @@ Vector trainPocketPLA(const std::vector<std::tuple<Vector, int>>& data,
     auto& [x, y] = data[dis(random_engine)];
     if (weights.dot(x) * y <= 0.0) {
       steps++;
-      if (y == 1)
-        weights = weights + x;
-      else
-        weights = weights - x;
+      weights = weights + y * x;
+      error = test(weights, data);
+      if (error < best_error) {
+        best_weights = weights * 1.0;
+        best_error = error;
+      }
     }
   }
 
-  return weights;
+  return best_weights;
 }
 
 double test(const Vector& weights,
