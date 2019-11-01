@@ -8,7 +8,6 @@
 
 class Vector {
   std::vector<double> vector;
-  unsigned int dimension = 0;
 
 public:
   void addElement(double);
